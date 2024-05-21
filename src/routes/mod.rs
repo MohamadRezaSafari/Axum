@@ -4,6 +4,7 @@ mod mirror_body_json;
 mod path_variables;
 mod query_params;
 mod mirror_user_agent;
+mod mirror_custom_header;
 
 use axum::{handler, routing::{get, post}, Router};
 
@@ -13,6 +14,7 @@ use self::mirror_body_json::mirror_body_json;
 use self::path_variables::{path_variables, hadr_coded_path};
 use self::query_params::query_params;
 use self::mirror_user_agent::mirror_user_agent;
+use self::mirror_custom_header::mirror_custom_header;
 
 
 pub fn create_routes() -> Router {
@@ -24,4 +26,5 @@ pub fn create_routes() -> Router {
         .route("/path_variables/15", get(hadr_coded_path))
         .route("/query_params", get(query_params))
         .route("/mirror_user_agent", get(mirror_user_agent))
+        .route("/mirror_custom_header", get(mirror_custom_header))
 }
