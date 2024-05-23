@@ -11,6 +11,7 @@ mod set_middleware_custom_header;
 mod always_errors;
 mod get_json;
 mod validate_with_serde;
+mod custom_json_extractor;
 
 use axum::{handler, http::Method, middleware, routing::{get, post}, Extension, Router};
 use tower_http::cors::{Any,  CorsLayer};
