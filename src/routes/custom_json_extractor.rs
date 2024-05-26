@@ -18,7 +18,7 @@ pub struct  RequestUser {
     password: String
 }
 
-#[async_trait]
+/*#[async_trait]
 impl<S> FromRequestParts<S> for RequestUser
     where
         S: Send + Sync,
@@ -29,13 +29,14 @@ impl<S> FromRequestParts<S> for RequestUser
     type Rejection = (StatusCode, String);
 
     async fn from_request_parts(parts: &mut Parts, state: &S) -> Result<Self, Self::Rejection> {
-        if let Some(user_agent) = parts.headers.get(USER_AGENT) {
-            Ok(RequestUser(user_agent.clone()))
-        } else {
-            Err((StatusCode::BAD_REQUEST, "`User-Agent` header is missing"))
-        }
+      if let Some(user_agent) = parts.headers.get(USER_AGENT) {
+           Ok(RequestUser(user_agent.clone()))
+       } else {
+           Err((StatusCode::BAD_REQUEST, "`User-Agent` header is missing"))
+       }
+
     }
-}
+}*/
 
 pub async fn custom_json_extractor(user: RequestUser) {
     dbg!(user);
