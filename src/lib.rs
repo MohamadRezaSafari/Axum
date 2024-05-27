@@ -1,10 +1,12 @@
 mod routes;
 
+use sea_orm::{Database, DatabaseConnection};
 use routes::create_routes;
 
 
-pub async fn run() {
-    let app = create_routes();
+pub async fn run(database_uri: &str) {
+    let database = Database::connect(database_uri).await.unwrap();
+    let app = create_routes(database);
 
     // let app: Router = Router::new().route("/", get(hello_world));
 

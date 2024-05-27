@@ -14,6 +14,7 @@ mod validate_with_serde;
 mod custom_json_extractor;
 
 use axum::{handler, http::Method, middleware, routing::{get, post}, Extension, Router};
+use sea_orm::DatabaseConnection;
 use tower_http::cors::{Any,  CorsLayer};
 
 
@@ -38,7 +39,7 @@ pub struct  SharedData {
 }
 
 
-pub fn create_routes() -> Router {
+pub fn create_routes(database: DatabaseConnection) -> Router {
 
     let cors = CorsLayer::new()
         .allow_methods([Method::GET, Method::POST])
@@ -64,4 +65,5 @@ pub fn create_routes() -> Router {
         .route("/validate_with_serde", get(validate_with_serde))
         .layer(cors)
         .layer(Extension(share_data))
+        .layer(Extension(database))
 }
